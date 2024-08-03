@@ -2,27 +2,33 @@ import { useState, useEffect } from 'react';
 import JobListing from './JobListing';
 import Spinner from './Spinner';
 
+// Base URL for API
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const JobListings = ({ isHome = false }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => { 
     const fetchJobs = async () => {
-      const apiUrl = isHome
- ? '/api/jobs?_limit=3' : '/api/jobs';
+      const url = isHome ? `${apiUrl}/jobs?_limit=3` : `${apiUrl}/jobs`;
       try {
-        const res = await fetch(apiUrl);
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
         const data = await res.json();
         setJobs(data);
       } catch (error) {
-        console.log('Error fetching data', error);
+        console.error('Error fetching data:', error);
+        setError('Failed to load jobs');
       } finally {
         setLoading(false);
       }
     }
     fetchJobs();
-
-  }, []);
+  }, [isHome]);
 
   return (
     <section className="bg-blue-50 px-4 py-10">
@@ -31,17 +37,17 @@ const JobListings = ({ isHome = false }) => {
           {isHome ? 'Recent Jobs' : 'Browse Jobs'}
         </h2>
         
-          {loading ? (
-            <Spinner loading={loading} />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {loading ? (
+          <Spinner loading={loading} />
+        ) : error ? (
+          <p className="text-red-500 text-center">{error}</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {jobs.map((job) => (
-             <JobListing key={job.id} job={job} />  
-          
-             ))}
-            </div>
-          )}
-            
+              <JobListing key={job.id} job={job} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
