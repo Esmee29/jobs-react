@@ -1,8 +1,4 @@
-import { Route, 
-  createBrowserRouter, 
-  createRoutesFromElements, 
-  RouterProvider,
-} from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import JobsPage from "./pages/JobsPage";
@@ -12,39 +8,51 @@ import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
 
 // Replace this with your actual Vercel deployment URL
-const API_URL = 'https://jobs-react-jmwyz07wl-esmees-projects.vercel.app/';
+const API_URL = 'https://jobs-react-jmwyz07wl-esmees-projects.vercel.app';
 
 const App = () => {
   // Add a new job
   const addJob = async (newJob) => {
-    const res = await fetch(`${API_URL}/jobs`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newJob),
-    });
-    return;
+    try {
+      const res = await fetch(`${API_URL}/jobs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newJob),
+      });
+      if (!res.ok) throw new Error('Failed to add job');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Delete a job
   const deleteJob = async (id) => {
-    const res = await fetch(`${API_URL}/jobs/${id}`, {
-      method: 'DELETE',
-    });
-    return;
+    try {
+      const res = await fetch(`${API_URL}/jobs/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) throw new Error('Failed to delete job');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Update a job
   const updateJob = async (job) => {
-    const res = await fetch(`${API_URL}/jobs/${job.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(job),
-    });
-    return;
+    try {
+      const res = await fetch(`${API_URL}/jobs/${job.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(job),
+      });
+      if (!res.ok) throw new Error('Failed to update job');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const router = createBrowserRouter(
