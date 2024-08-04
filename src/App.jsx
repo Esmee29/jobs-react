@@ -22,36 +22,27 @@ const App = () => {
       },
       body: JSON.stringify(newJob),
     });
-    if (!res.ok) {
-      console.error('Failed to add job');
-    }
-    return res.json(); // Return the response if needed
+    return;
   };
 
   // Delete Job
   const deleteJob = async (id) => {
-    const res = await fetch(`/api/jobs?id=${id}`, {
+    const res = await fetch(`/api/jobs/${id}`, {
       method: 'DELETE',
     });
-    if (!res.ok) {
-      console.error('Failed to delete job');
-    }
-    return res.json(); // Return the response if needed
+    return;
   };
 
   // Update Job
   const updateJob = async (job) => {
-    const res = await fetch(`/api/jobs?id=${job.id}`, {
+    const res = await fetch(`/api/jobs/${job.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(job),
     });
-    if (!res.ok) {
-      console.error('Failed to update job');
-    }
-    return res.json(); // Return the response if needed
+    return;
   };
 
   const router = createBrowserRouter(
@@ -77,5 +68,4 @@ const App = () => {
 
   return <RouterProvider router={router} />;
 };
-
 export default App;

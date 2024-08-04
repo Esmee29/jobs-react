@@ -126,11 +126,8 @@ const AddJobPage = ({ addJobSubmit }) => {
                 <option value="£70K - £80K">£70K - £80K</option>
                 <option value="£80K - £90K">£80K - £90K</option>
                 <option value="£90K - £100K">£90K - £100K</option>
-                <option value="£100K - £120K">£100K - £120K</option>
-                <option value="£120K - £140K">£120K - £140K</option>
-                <option value="£140K - £160K">£140K - £160K</option>
-                <option value="£160K - £180K">£160K - £180K</option>
-                <option value="Over £180K">Over £180K</option>
+                <option value="Over £100K">Over £100K</option>
+
               </select>
             </div>
 
