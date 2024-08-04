@@ -8,13 +8,13 @@ import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
 
 // Replace this with your actual Vercel deployment URL
-const API_URL = 'https://jobs-react-iota.vercel.app/';
+const API_URL = 'https://jobs-react-iota.vercel.app';
 
 const App = () => {
   // Add a new job
   const addJob = async (newJob) => {
     try {
-      const res = await fetch(`${API_URL}/jobs`, {
+      const res = await fetch(`${API_URL}/api/jobs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const App = () => {
   // Delete a job
   const deleteJob = async (id) => {
     try {
-      const res = await fetch(`${API_URL}/jobs/${id}`, {
+      const res = await fetch(`${API_URL}/api/jobs/${id}`, {
         method: 'DELETE',
       });
       if (!res.ok) throw new Error('Failed to delete job');
@@ -42,7 +42,7 @@ const App = () => {
   // Update a job
   const updateJob = async (job) => {
     try {
-      const res = await fetch(`${API_URL}/jobs/${job.id}`, {
+      const res = await fetch(`${API_URL}/api/jobs/${job.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
