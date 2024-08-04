@@ -8,7 +8,7 @@ import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
 
 // Replace this with your actual Vercel deployment URL
-const API_URL = 'https://jobs-react-jmwyz07wl-esmees-projects.vercel.app';
+const API_URL = 'https://jobs-react-iota.vercel.app/';
 
 const App = () => {
   // Add a new job
