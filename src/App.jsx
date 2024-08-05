@@ -50,7 +50,7 @@ const App = () => {
   // Update Job
   const updateJob = async (job) => {
     try {
-      const res = await fetch(`/api/jobs/${job.id}`, { // Correct use of backticks
+      const res = await fetch(`/api/jobs/${job.id}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
