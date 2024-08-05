@@ -15,34 +15,55 @@ import EditJobPage from './pages/EditJobPage';
 const App = () => {
   // Add New Job
   const addJob = async (newJob) => {
-    const res = await fetch('/api/jobs', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newJob),
-    });
-    return;
+    try {
+      const res = await fetch('/api/jobs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newJob),
+      });
+      if (!res.ok) {
+        throw new Error('Failed to add job');
+      }
+      return res.json();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Delete Job
   const deleteJob = async (id) => {
-    const res = await fetch(/api/jobs/${id}, {
-      method: 'DELETE',
-    });
-    return;
+    try {
+      const res = await fetch(`/api/jobs/${id}`, { // Correct use of backticks
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        throw new Error('Failed to delete job');
+      }
+      return res.json();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Update Job
   const updateJob = async (job) => {
-    const res = await fetch(/api/jobs/${job.id}, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(job),
-    });
-    return;
+    try {
+      const res = await fetch(`/api/jobs/${job.id}`, { // Correct use of backticks
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(job),
+      });
+      if (!res.ok) {
+        throw new Error('Failed to update job');
+      }
+      return res.json();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const router = createBrowserRouter(
@@ -69,4 +90,5 @@ const App = () => {
   
   return <RouterProvider router={router} />;
 };
+
 export default App;
