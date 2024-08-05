@@ -49,6 +49,7 @@ const App = () => {
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
         <Route index element={<HomePage />} />
+        <Route path='/jobs-react' element={<HomePage />} />
         <Route path='/jobs' element={<JobsPage />} />
         <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob} />} />
         <Route
@@ -65,7 +66,7 @@ const App = () => {
       </Route>
     )
   );
-
+  
   return <RouterProvider router={router} />;
 };
 export default App;
