@@ -13,36 +13,39 @@ import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
 
 const App = () => {
+  // Base URL for the JSON server
+  const baseUrl = 'https://my-json-server.typicode.com/Esmee29/jobs-react';
+
   // Add New Job
   const addJob = async (newJob) => {
-    const res = await fetch('/api/jobs', {
+    const res = await fetch(`${baseUrl}/jobs`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newJob),
     });
-    return;
+    return res.json(); // Optionally return the JSON response
   };
 
   // Delete Job
   const deleteJob = async (id) => {
-    const res = await fetch(`/api/jobs/${id}`, {
+    const res = await fetch(`${baseUrl}/jobs/${id}`, {
       method: 'DELETE',
     });
-    return;
+    return res.json(); // Optionally return the JSON response
   };
 
   // Update Job
   const updateJob = async (job) => {
-    const res = await fetch(`/api/jobs/${job.id}`, {
+    const res = await fetch(`${baseUrl}/jobs/${job.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(job),
     });
-    return;
+    return res.json(); // Optionally return the JSON response
   };
 
   const router = createBrowserRouter(
@@ -69,4 +72,5 @@ const App = () => {
   
   return <RouterProvider router={router} />;
 };
+
 export default App;
